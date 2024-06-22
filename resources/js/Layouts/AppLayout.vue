@@ -52,6 +52,24 @@ const logout = () => {
                                     Dashboard
                                 </NavLink>
                             </div>
+
+                            <div v-if="$page.props.user.permissions.includes('read categories')" class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('categories.index')" :active="route().current('categories.*')">
+                                    Categories
+                                </NavLink>
+                            </div>
+
+                            <div v-if="$page.props.user.permissions.includes('read lessons')" class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('lessons.index')" :active="route().current('lessons.*')">
+                                    Lessons
+                                </NavLink>
+                            </div>
+
+                            <div v-if="$page.props.user.permissions.includes('read roles')" class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                <NavLink :href="route('roles.index')" :active="route().current('roles.*')">
+                                    Roles
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
