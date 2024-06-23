@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -11,7 +12,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return ('Hello World');
+        $categories = Category::paginate(25);
+        return inertia('Categories/index', ['categories' => $categories]);
     }
 
     /**
@@ -19,15 +21,16 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Categories/Category/create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        Category::create($request->validated());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -43,7 +46,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return inertia('Categories/Category/edit', ['category' => $id]);
     }
 
     /**
